@@ -1,0 +1,102 @@
+@media (max-width: 770px) {
+    #desktop{
+        display: none;
+    }
+}
+@media (min-width: 770px) {
+    #mobile{
+        display: none;
+    }
+}
+
+body{
+    color: white;
+    background-color: rgb(8, 8, 43);
+}
+
+.logo{
+    float: right;
+}
+.logo .py{
+    color: rgb(39, 158, 238);
+}
+.logo .code{
+    color: rgb(238, 218, 39);
+}
+
+.bg-cosmos{
+    background-color: rgb(6, 16, 63);
+}
+.bt-blue{
+    border-radius: 20px;
+    border-color: rgb(22, 123, 190);
+    color: rgb(22, 123, 190);
+}
+.bt-blue:hover{
+    background-color: rgb(22, 123, 190);
+    color: rgb(6, 16, 63);
+    border-color: rgb(6, 16, 63);
+}
+
+.bt-yellow{
+    border-radius: 20px;
+    border-color: rgb(231, 218, 28);
+    color: rgb(231, 218, 28);
+}
+.bt-yellow:hover{
+    background-color: rgb(231, 218, 28);
+    color: rgb(6, 16, 63);
+    border-color: rgb(6, 16, 63);
+}
+
+.br-2{
+    border-radius: 20px;
+}
+
+.avatar-sm{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+.avatar{
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.avatar-lg{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.card .card-header{
+    background-color: rgb(6, 16, 63);
+    color: rgb(231, 218, 28);
+}
+.card .card-footer{
+    background-color: rgb(6, 16, 63);
+}
+.card .card-body{
+    background-color: rgb(13, 26, 83);
+}
+.br-post{
+    border-color: rgb(231, 218, 28);
+}
+.br-blog{
+    border-color: rgb(77, 211, 245);
+}
+
+.right{
+    float: right;
+}
+
+.form-inline{
+    display: flex;
+}
+
+pre{
+    background-color: rgb(59, 59, 59);
+    padding: 15px;
+    border-radius: 8px;
+}

@@ -1,0 +1,79 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+
+{% block content %}
+    
+    <div class="container">
+        <center>
+            {% if user.avatar %}
+                <img src="{{user.avatar.url}}" class="avatar-lg" alt="">
+                {% else %}
+                <img src="/static/assets/image/10.jfif" class="avatar-lg" alt="">
+            {% endif %}
+            <h1 class="text-warning">{{user.name}}</h1>
+            <p class="small text-danger">{{user.surname}}</p>
+            <p class="btn btn-outline-primary mt-3"><span class="zmdi zmdi-accounts"></span> {{user.follows.all.count}} followers</p>
+            
+            {% if user == request.user.user_pro %}
+                <a href="{% url 'accounts:update_pro' user.pk %}" class="btn btn-outline-warning"><span class="zmdi zmdi-edit"></span> Update Profile</a>
+                {% else %}
+                {% if request.user in user.follows.all %}
+                    <a href="{% url 'accounts:follow' user.slug %}" class="btn btn-outline-danger"><span class="zmdi zmdi-mood-bad"></span> Unfollow</a>
+                    {% else %}
+                    <a href="{% url 'accounts:follow' user.slug %}" class="btn btn-outline-success"><span class="zmdi zmdi-account-add"></span> Follow</a>
+                {% endif %}
+            {% endif %} <br>
+            <a href="https://github.com/{{user.git}}"><span class="zmdi zmdi-github"></span> GitHub</a>
+            <a href="https://github.com/{{user.telegram}}"><span class="zmdi zmdi-tumblr ml-3"></span> Telegram</a>
+            <hr>
+        </center>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Posts</h3><hr>
+                
+                {% for post in posts %}
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h3>{{post.title}} | <span class="zmdi zmdi-favorite text-danger"> {{post.like.all.count}}</span></h3>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{post.get_absolute_url}}" class="btn btn-outline-success"><span class="zmdi zmdi-eye"></span> View</a>
+                            
+                            {% if post.user == request.user %}
+                                <a href="{% url 'main:update_post' post.pk %}" class="btn btn-outline-warning"><span class="zmdi zmdi-edit"></span> Update</a>
+                                <a href="" class="btn btn-outline-danger"><span class="zmdi zmdi-close"></span> Remove</a>
+                            {% endif %}
+                                
+                        </div>
+                    </div>
+                {% endfor %}
+                    
+            </div>
+            <div class="col-md-6">
+                <h3>Blogs</h3><hr>
+
+                {% for post in blogs %}
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h3>{{post.title}} | <span class="zmdi zmdi-favorite text-danger"> {{post.like.all.count}}</span></h3>
+                        </div>
+                        <div class="card-body">
+                            <center><img src="{{post.image.url}}" height="200" alt=""></center>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{post.get_absolute_url}}" class="btn btn-outline-success"><span class="zmdi zmdi-eye"></span> View</a>
+                            
+                            {% if post.user == request.user %}
+                                <a href="{% url 'main:update_blog' post.pk %}" class="btn btn-outline-warning"><span class="zmdi zmdi-edit"></span> Update</a>
+                                <a href="" class="btn btn-outline-danger"><span class="zmdi zmdi-close"></span> Remove</a>
+                            {% endif %}
+                                
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    

@@ -1,0 +1,68 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <form action="" method="" class="form-inline">
+            <input type="text" class="form-control" placeholder="Search from posts">
+            <button type="submit" class="btn btn-outline-primary ml-2"> Search</button>
+        </form>
+        <br>
+        <a href="{% url 'main:add_post' %}" class="btn btn-warning right"><span class="zmdi zmdi-attachment"></span> Make Post</a>
+        <h3>All Posts: </h3>
+        <hr>
+
+        <div class="row mt-3">
+            
+            {% for obj in object_list %}
+                
+                <div class="col-md-4">
+                    <div class="card br-post mb-3">
+                        <div class="card-header d-flex">
+                            {% if obj.user.user_pro.avatar %}
+                                <a href="{% url 'accounts:profile' obj.user.user_pro.slug %}" class=""><img src="{{obj.user.user_pro.avatar.url}}" class="avatar-sm" alt=""></a>
+                                {% else %}
+                                <a href="{% url 'accounts:profile' obj.user.user_pro.slug %}" class=""><img src="/static/assets/image/10.jfif" class="avatar-sm" alt=""></a>
+                            {% endif %}
+                            <div>
+                                <h4 class="text-warning ml-3">{{obj.user.user_pro.name|truncatechars:'11'}}</h4>
+                                <div class="bg-primary badge ml-3"><span class="zmdi zmdi-accounts"></span> followers: {{obj.user.user_pro.follows.all.count}}</div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3>{{obj.title}}</h3>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{obj.get_absolute_url}}" class="btn btn-outline-warning"><span class="zmdi zmdi-eye"></span> View</a>
+                            <a href="{% url 'accounts:profile' obj.user.user_pro.slug %}" class="btn btn-outline-primary"><span class="zmdi zmdi-account"></span> Author</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+                
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="pagination">
+                  <span class="step-links">
+                      {% if page_obj.has_previous %}
+                          <a href="?page=1" class="btn btn-outline-warning"><span class="zmdi zmdi-long-arrow-left"></span> first</a>
+                          <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-warning"><span class="zmdi zmdi-arrow-left"></span></a>
+                      {% endif %}
+
+                      <span class="current badge bg-warning text-dark">
+                          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                      </span>
+
+                      {% if page_obj.has_next %}
+                          <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-warning"><span class="zmdi zmdi-arrow-right"></span></a>
+                          <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-warning">last <span class="zmdi zmdi-long-arrow-right"></span></a>
+                      {% endif %}
+                  </span>
+              </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    

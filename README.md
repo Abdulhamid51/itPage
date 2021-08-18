@@ -1,2 +1,2 @@
-# itPage
- For IT blogs and posts
+# ItPage
+ It univers

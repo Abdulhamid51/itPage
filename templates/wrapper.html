@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/css/mycode.css">
+    <link href="/static/assets/css/material-design-iconic-font.css" rel="stylesheet">
+    <title>PyCode</title>
+</head>
+<body>
+    <!-- navbar section -->
+    <section>
+        <div id="desktop">
+            <div class="bg-cosmos p-3">
+                <a href="{% url 'main:home' %}" class="btn btn-outline-light bt-blue"><span class="zmdi zmdi-home"></span> Home</a>
+                <a href="#" class="btn btn-outline-danger br-2"><span class="zmdi zmdi-favorite-outline"></span> Favorites</a>
+                <a href="{% url 'main:posts' %}" class="btn btn-outline-light bt-yellow"><span class="zmdi zmdi-attachment"></span> Posts</a>
+                <a href="{% url 'main:blogs' %}" class="btn btn-outline-info br-2"><span class="zmdi zmdi-book-image"></span> Blogs</a>
+                
+                {% if request.user.user_pro %}
+                    {% if request.user.user_pro.avatar %}
+                        <a href="{% url 'accounts:profile' request.user.user_pro.slug %}" class=""><img src="{{request.user.user_pro.avatar.url}}" class="avatar-sm" alt=""></a>
+                        {% else %}
+                        <a href="{% url 'accounts:profile' request.user.user_pro.slug %}" class=""><img src="/static/assets/image/10.jfif" class="avatar-sm" alt=""></a>
+                    {% endif %}
+                    {% else %}
+                    <a href="{% url 'accounts:create_pro' %}" class="btn btn-outline-primary bt-blue"><span class="zmdi zmdi-plus"></span> Profile</a>
+                {% endif %}
+                    
+                
+                
+                <div class="logo">
+                    <h1><span class="py">it</span><span class="code">Page</span></h1>
+                </div>
+                <hr>
+            </div>
+            <br><br>
+        </div>
+        <div id="mobile">
+            <br><br>
+            <center>
+                <div class="bg-cosmos p-2 navbar-light fixed-bottom">
+                    <a href="{% url 'main:home' %}" class="btn btn-outline-light bt-blue"><span class="zmdi zmdi-home"></span></a>
+                    <a href="#" class="btn btn-outline-danger br-2"><span class="zmdi zmdi-favorite-outline"></span></a>
+                    <a href="{% url 'main:posts' %}" class="btn btn-outline-light bt-yellow"><span class="zmdi zmdi-attachment"></span></a>
+                    <a href="{% url 'main:blogs' %}" class="btn btn-outline-info br-2"><span class="zmdi zmdi-book-image"></span></a>
+
+                    {% if request.user.user_pro %}
+                        {% if request.user.user_pro.avatar %}
+                            <a href="{% url 'accounts:profile' request.user.user_pro.slug %}" class=""><img src="{{request.user.user_pro.avatar.url}}" class="avatar-sm" alt=""></a>
+                            {% else %}
+                            <a href="{% url 'accounts:profile' request.user.user_pro.slug %}" class=""><img src="/static/assets/image/10.jfif" class="avatar-sm" alt=""></a>
+                        {% endif %}
+                        {% else %}
+                        <a href="{% url 'accounts:create_pro' %}" class="btn btn-outline-primary bt-blue"><span class="zmdi zmdi-plus"></span></a>
+                    {% endif %}
+                </div>
+            </center>
+        </div>
+    </section>
+
+{% block content %}
+    
+{% endblock content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+    $('input').addClass('form-control w-auto mb-3')
+</script>
+    
+<br><br><br>
+<script type="text/javascript" src='{% static "ckeditor/ckeditor-init.js" %}'></script>
+<script type="text/javascript" src='{% static "ckeditor/ckeditor/ckeditor.js" %}'></script>
+</body>
+</html>

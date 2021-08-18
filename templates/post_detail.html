@@ -1,0 +1,49 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="card">
+            <div class="row card-header">
+                <div class="col-md-2">
+                    {% if post.user.user_pro.avatar %}
+                        <a href="{% url 'accounts:profile' post.user.user_pro.slug %}" class=""><img src="{{post.user.user_pro.avatar.url}}" class="avatar" alt=""></a>
+                        {% else %}
+                        <a href="{% url 'accounts:profile' post.user.user_pro.slug %}" class=""><img src="/static/assets/image/10.jfif" class="avatar" alt=""></a>
+                    {% endif %}
+                    <div class="bg-primary badge mt-2"><span class="zmdi zmdi-accounts"></span> followers: {{post.user.user_pro.follows.all.count}}</div>
+                </div>
+                <div class="col-md-5">
+                    <h3 class="mt-2">{{post.user.user_pro.name|truncatechars:'15'}}</h3>
+                    <p class="small mt-1 text-danger">{{post.user.user_pro.surname}}</p>
+                </div>
+                <div class="col-md-3">
+                    <br>
+                    <button class="btn btn-danger"><span class="zmdi zmdi-download"></span> Download PDF</button>
+                    <button class="btn btn-primary"><span class="zmdi zmdi-link"></span> Copy link</button>
+                </div>
+                <div class="col-md-2 mt-3 d-flex">
+                    
+                    {% if request.user.user_pro in post.like.all %}
+                        <a href="{% url 'main:like' post.slug %}" class="m-2"><h2><span class="zmdi zmdi-thumb-up text-primary"></span></h2></a>
+                        {% else %}
+                        <a href="{% url 'main:like' post.slug %}" class="m-2"><h2><span class="zmdi zmdi-thumb-up text-light"></span></h2></a>
+                    {% endif %}
+                        
+                    <a href="{% url 'main:home' %}" class="m-2"><h2><span class="zmdi zmdi-thumb-down text-danger"></span></h2></a>
+                </div>
+            </div>
+        </div>
+        <div class="post-detail">
+             <h1 class="mt-5">{{post.title}} | <span class="zmdi zmdi-favorite text-danger"> {{post.like.all.count}}</span></h1><hr>
+            <div class="w-100 p-3">{{post.body|safe}}</div><hr>
+            Tags:
+            {% for tag in post.tags.all %}
+                <a href="" class="{{tag.color}} btn m-2 text-light"><b>{{tag.name}}</b></a>
+            {% endfor %}
+        </div>
+        <hr>
+        
+    </div>
+{% endblock content %}
+ 

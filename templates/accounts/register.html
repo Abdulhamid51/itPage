@@ -1,0 +1,32 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <center>
+        <h3>Register or <a href="{% url 'accounts:login' %}" class="nav-link">Log in</a></h3>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="">Name</label>
+            {{form.first_name}}
+            <label for="">Surname</label>
+            {{form.last_name}}
+            <label for="">Username</label>
+            {{form.username}}
+            <label for="">Password</label>
+            {{form.password1}}
+            <label for="">Repaid password</label>
+            {{form.password2}}
+            <button type="submit" class="btn btn-outline-primary">Register</button>
+        </form>
+    </center>
+</div>
+    
+<script>
+    document.querySelector('#id_first_name').className='form-control mb-3 w-auto'
+    document.querySelector('#id_last_name').className='form-control mb-3 w-auto'
+    document.querySelector('#id_username').className='form-control mb-3 w-auto'
+    document.querySelector('#id_password1').className='form-control mb-3 w-auto'
+    document.querySelector('#id_password2').className='form-control mb-3 w-auto'
+</script>
+{% endblock content %}

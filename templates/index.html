@@ -1,0 +1,93 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+
+{% block content %}
+    
+<div class="container mb-5">
+    <br>
+    <h3>My Followers: </h3><hr>
+    
+    <div class="row">
+        
+        {% for post in post %}
+        
+            {% if request.user in post.follows.all %}
+                <div class="col-md-4 col-lg-3">
+                    <div class="card mb-3">
+                        <div class="card-header d-flex">
+                            {% if post.avatar %}
+                                <a href="#" class=""><img src="{{post.avatar.url}}" class="avatar" alt=""></a>
+                                {% else %}
+                                <a href="#" class=""><img src="/static/assets/image/10.jfif" class="avatar" alt=""></a>
+                            {% endif %}
+                            <div>
+                                <h4 class="text-warning ml-3">{{post.name|truncatechars:'9'}}</h4>
+                                <div class="bg-primary badge ml-3"><span class="zmdi zmdi-accounts"></span> followers: {{post.follows.all.count}}</div>
+                            </div>
+                            
+                        </div>
+                        <div class="card-body">
+                            <a href="{% url 'accounts:profile' post.slug %}" class="btn btn-outline-primary"><span class="zmdi zmdi-eye"></span> View</a>
+                            <a href="{% url 'accounts:follow' post.slug %}" class="btn btn-outline-danger"><span class="zmdi zmdi-mood-bad"></span> Unfollow</a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                
+            {% endif %}
+                
+        {% endfor %}
+            
+    </div>
+
+</div>
+
+<div class="container">
+    <h3>You may like: </h3><hr>
+    <div class="row">
+
+        {% for post in recent %}
+            
+            {% if post == request.user %}
+
+                {% else %}
+                
+                {% if post %} 
+                <div class="col-md-4 col-lg-3">
+                    <div class="card mb-3">
+                        <div class="card-header d-flex">
+                            {% if post.avatar %}
+                                <a href="#" class=""><img src="{{post.avatar.url}}" class="avatar" alt=""></a>
+                                {% else %}
+                                <a href="#" class=""><img src="/static/assets/image/10.jfif" class="avatar" alt=""></a>
+                            {% endif %}
+                            <div>
+                                <h4 class="text-warning ml-3">{{post.name|truncatechars:'9'}}</h4>
+                                <div class="bg-primary badge ml-3"><span class="zmdi zmdi-accounts"></span> followers: {{post.follows.all.count}}</div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <a href="{% url 'accounts:profile' post.slug %}" class="btn btn-outline-primary"><span class="zmdi zmdi-eye"></span> View</a>
+                            
+                            {% if request.user in post.follows.all %}
+                                <a href="{% url 'accounts:follow' post.slug %}" class="btn btn-outline-danger"><span class="zmdi zmdi-mood-bad"></span> Unfollow</a>
+                                {% else %}
+                                <a href="{% url 'accounts:follow' post.slug %}" class="btn btn-outline-success"><span class="zmdi zmdi-account-add"></span> Follow</a>
+                            {% endif %}
+                                
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+
+                {% endif %}
+                                
+            {% endif %}
+        {% endfor %}
+
+    </div>
+    
+</div>    
+
+{% endblock content %}
+    
