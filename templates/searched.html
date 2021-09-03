@@ -1,0 +1,70 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    {% if post and blog %}
+    <h3>Results for "{{data}}"</h3><hr>
+    
+    <h4>Post results ({{post.count}})</h4><br>
+    {% for obj in post %}
+    <div class="card br-post mb-3">
+        <div class="card-header d-flex">
+            {% if obj.user.user_pro.avatar %}
+                <a href="{% url 'accounts:profile' obj.user.user_pro.slug %}" class=""><img src="{{obj.user.user_pro.avatar.url}}" class="avatar-sm" alt=""></a>
+                {% else %}
+                <a href="{% url 'accounts:profile' obj.user.user_pro.slug %}" class=""><img src="/static/assets/image/10.jfif" class="avatar-sm" alt=""></a>
+                {% endif %}
+                <div>
+                <h4 class="text-warning ml-3">{{obj.user.user_pro.name|truncatechars:'11'}}</h4>
+                <div class="bg-primary badge ml-3"><span class="zmdi zmdi-accounts"></span> followers: {{obj.user.user_pro.follows.all.count}}</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>{{obj.title}} | <i class="zmdi zmdi-thumb-up text-primary"></i> {{obj.like.count}}</h3>
+        </div>
+        <div class="card-footer">
+            <a href="{{obj.get_absolute_url}}" class="btn btn-outline-warning"><span class="zmdi zmdi-eye"></span> View</a>
+            <a href="{% url 'accounts:profile' obj.user.user_pro.slug %}" class="btn btn-outline-primary"><span class="zmdi zmdi-account"></span> Author</a>
+        </div>
+    </div>
+    {% endfor %}
+    <hr>
+    <h4>Blog results ({{blog.count}})</h4><br>
+    {% for obj in blog %}
+    <div class="card br-blog mb-3">
+        <div class="card-header d-flex">
+            {% if obj.user.user_pro.avatar %}
+            <a href="{% url 'accounts:profile' obj.user.user_pro.slug %}" class=""><img src="{{obj.user.user_pro.avatar.url}}" class="avatar-sm" alt=""></a>
+            {% else %}
+            <a href="{% url 'accounts:profile' obj.user.user_pro.slug %}" class=""><img src="/static/assets/image/10.jfif" class="avatar-sm" alt=""></a>
+            {% endif %}
+            <div>
+                <h4 class="text-warning ml-3">{{obj.user.user_pro.name|truncatechars:'11'}}</h4>
+                <div class="bg-primary badge ml-3"><span class="zmdi zmdi-accounts"></span> followers: {{obj.user.user_pro.follows.all.count}}</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4"><img src="{{obj.image.url}}" class="w-100" alt=""></div>
+                <div class="col-md-8">
+                    <h3>{{obj.title}} | <i class="zmdi zmdi-thumb-up text-primary"></i> {{obj.like.count}}</h3><hr>
+                    <p>{{obj.body|safe}}</p>
+                </div>    
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{{obj.get_absolute_url}}" class="btn btn-outline-info"><span class="zmdi zmdi-eye"></span> View</a>
+            <a href="{% url 'accounts:profile' obj.user.user_pro.slug %}" class="btn btn-outline-primary"><span class="zmdi zmdi-account"></span> Author</a>
+        </div>
+    </div>
+    {% endfor %}
+    
+    {% else %}
+    <center>
+        <h3>No results for "{{data}}'</h3>
+    </center>
+    {% endif %}
+          
+</div>
+{% endblock content %}

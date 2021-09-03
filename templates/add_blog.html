@@ -13,19 +13,22 @@
                     {{form.category}}
                     <label for="id_image">Image</label>
                     {{form.image}}
-                </div>
-                <div class="col-md-6">
                     <label for="id_body">Body</label>
-                    {{form.body}}
+                    {{form.body}} <hr>
                     <button type="submit" class="btn btn-info">Add blog</button>
+                </div>
+                <div class="col-md-6" id="desktop">
+                    <img class="ml-5 w-100" src="/static/assets/image/setka.png" width="" alt="">
                 </div>
             </div>
         </form>
     </div>
+
 <script>
     document.querySelector('#id_title').className='form-control mb-3'
     document.querySelector('#id_category').className='form-control mb-3 w-auto'
     document.querySelector('#id_image').className='form-control mb-3 w-auto'
+    document.querySelector('#id_body').className='form-control w-auto'
 </script>
 
 {% endblock content %}

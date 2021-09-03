@@ -1,6 +1,7 @@
+from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import (
-    View, UpdateView, DetailView, ListView
+    View, UpdateView, DetailView, ListView, DeleteView
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
@@ -11,6 +12,18 @@ import rstr
 slug_random = 'abdcfghijklmnopqrstuvwxyzABCDFGHIJKLMNOPQRSTUVWXYZ1234567890'
 
 # Create your views here.
+
+def search(request):
+    data = request.GET.get('search')
+    post = Post.objects.filter(title__icontains=data)
+    blog = Blog.objects.filter(title__icontains=data)
+    context = {
+        'post':post,
+        'blog':blog,
+        'data':data,
+    }
+    return render(request, "searched.html", context)
+
 
 class HomeView(LoginRequiredMixin, View):
     
@@ -158,3 +171,15 @@ def blike(request, slug):
         post.like.remove(request.user.user_pro)
         post.save()
         return redirect('/blogs/')
+
+def delete_post(request):
+    pk = request.GET.get('pk')
+    post = Post.objects.get(pk=pk)
+    post.delete()
+    return JsonResponse({'status':'ok'})
+
+def delete_blog(request):
+    pk = request.GET.get('pk')
+    post = Blog.objects.get(pk=pk)
+    post.delete()
+    return JsonResponse({'status':'ok'})

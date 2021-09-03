@@ -6,7 +6,7 @@
     <div class="container">
         <center>
             {% if user.avatar %}
-                <img src="{{user.avatar.url}}" class="avatar-lg" alt="">
+                <a href="{{user.avatar.url}}"><img src="{{user.avatar.url}}" class="avatar-lg" alt=""></a>
                 {% else %}
                 <img src="/static/assets/image/10.jfif" class="avatar-lg" alt="">
             {% endif %}
@@ -24,7 +24,7 @@
                 {% endif %}
             {% endif %} <br>
             <a href="https://github.com/{{user.git}}"><span class="zmdi zmdi-github"></span> GitHub</a>
-            <a href="https://github.com/{{user.telegram}}"><span class="zmdi zmdi-tumblr ml-3"></span> Telegram</a>
+            <a href="https://t.me/{{user.telegram}}"><span class="zmdi zmdi-tumblr ml-3"></span> Telegram</a>
             <hr>
         </center>
         <div class="row">
@@ -32,7 +32,7 @@
                 <h3>Posts</h3><hr>
                 
                 {% for post in posts %}
-                    <div class="card mb-3">
+                    <div class="card mb-3" id="postView">
                         <div class="card-header">
                             <h3>{{post.title}} | <span class="zmdi zmdi-favorite text-danger"> {{post.like.all.count}}</span></h3>
                         </div>
@@ -41,7 +41,7 @@
                             
                             {% if post.user == request.user %}
                                 <a href="{% url 'main:update_post' post.pk %}" class="btn btn-outline-warning"><span class="zmdi zmdi-edit"></span> Update</a>
-                                <a href="" class="btn btn-outline-danger"><span class="zmdi zmdi-close"></span> Remove</a>
+                                <a href="#" onclick="deletePost({{post.pk}})" id="btnp" class="btn btn-outline-danger"><span class="zmdi zmdi-close"></span> Remove</a>
                             {% endif %}
                                 
                         </div>
@@ -65,7 +65,7 @@
                             
                             {% if post.user == request.user %}
                                 <a href="{% url 'main:update_blog' post.pk %}" class="btn btn-outline-warning"><span class="zmdi zmdi-edit"></span> Update</a>
-                                <a href="" class="btn btn-outline-danger"><span class="zmdi zmdi-close"></span> Remove</a>
+                                <a href="#" onclick="deleteBlog({{post.pk}})" class="btn btn-outline-danger" id="btnb"><span class="zmdi zmdi-close"></span> Remove</a>
                             {% endif %}
                                 
                         </div>
@@ -75,5 +75,36 @@
             </div>
         </div>
     </div>
+    <script src="/static/assets/js/jquery-1.11.0.min.js"></script>
+    <script>
+        function deletePost(pk){
+            if (window.XMLHttpRequest) {
+                var xhttp=new XMLHttpRequest();
+            } else {  // code for IE6, IE5
+                var xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xhttp.open("GET", `/delete_post/?pk=${pk}`)
+            xhttp.send()
+
+        }
+        function deleteBlog(pk){
+            if (window.XMLHttpRequest) {
+                var xhttp=new XMLHttpRequest();
+            } else {  // code for IE6, IE5
+                var xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xhttp.open("GET", `/delete_blog/?pk=${pk}`)
+            xhttp.send()
+
+        }
+        $('#btnp').on("click", function(){
+            $(this).html('Deleted')
+        })
+        $('#btnb').on("click", function(){
+            $(this).html('Deleted')
+        })
+    </script>
 {% endblock content %}
     

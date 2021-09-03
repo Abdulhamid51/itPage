@@ -4,14 +4,20 @@
     
 <div class="container">
     <h3>Update Post</h3>
-    <center>
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{form}}
-            <button type="submit" class="btn btn-success">Submit</button>
-        </form>
-    </center>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+        <hr>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
 </div>
 
+<script src="/static/assets/js/jquery-1.11.0.min.js"></script>
+<script>
+    $('input').addClass('form-control w-auto mt-2 mb-3')
+    $('#id_category').addClass('form-control w-auto mt-2 mb-3')
+    $('#avatar-clear_id').removeClass('form-control w-auto mt-2 mb-3')
+    $('form a').html('<a class="btn btn-success">View image</a>')
+</script>
 {% endblock content %}
     

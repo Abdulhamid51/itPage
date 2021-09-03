@@ -19,8 +19,10 @@
                 </div>
                 <div class="col-md-3">
                     <br>
-                    <button class="btn btn-danger m-1"><span class="zmdi zmdi-download"></span> Download PDF</button>
-                    <button class="btn btn-primary m-1"><span class="zmdi zmdi-link"></span> Copy link</button>
+                    <div class="btn-group">
+                        <button class="btn btn-danger"><span class="zmdi zmdi-download"></span></button>
+                        <button class="btn btn-primary"><span class="zmdi zmdi-link"></span></button>
+                    </div>
                 </div>
                 <div class="col-md-2 mt-3 d-flex">
                     
@@ -35,10 +37,10 @@
             </div>
         </div><br>
         <div id="desktop">
-            <center><img src="{{post.image.url}}" height="500" alt=""></center>
+            <center><a href="{{post.image.url}}"><img src="{{post.image.url}}" height="500" alt=""></a></center>
         </div>
         <div id="mobile">
-            <center><img src="{{post.image.url}}" class="w-100" alt=""></center>
+            <center><a href="{{post.image.url}}"><img src="{{post.image.url}}" class="w-100" alt=""></a></center>
         </div>
         <h1 class="mt-5">{{post.title}} | <span class="zmdi zmdi-favorite text-danger"> {{post.like.all.count}}</span></h1><hr>
         <div class="w-100"><p>{{post.body|safe}}</p></div><hr>

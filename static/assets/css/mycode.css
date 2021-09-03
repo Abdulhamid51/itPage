@@ -60,9 +60,10 @@ body{
 }
 .avatar{
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
 }
+
 .avatar-lg{
     border-radius: 50%;
     width: 150px;
@@ -73,9 +74,29 @@ body{
     background-color: rgb(6, 16, 63);
     color: rgb(231, 218, 28);
 }
+.card .card-footer{
+    background-color: rgb(6, 16, 63);
+}
 .card .card-body{
     background-color: rgb(13, 26, 83);
 }
-.card{
+.br-post{
     border-color: rgb(231, 218, 28);
+}
+.br-blog{
+    border-color: rgb(77, 211, 245);
+}
+
+.right{
+    float: right;
+}
+
+.form-inline{
+    display: flex;
+}
+
+pre{
+    background-color: rgb(59, 59, 59);
+    padding: 15px;
+    border-radius: 8px;
 }

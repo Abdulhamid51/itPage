@@ -5,7 +5,7 @@
     
 <div class="container mb-5">
     <br>
-    <h3>My Followers: </h3><hr>
+    <h3>My Followings: </h3><hr>
     
     <div class="row">
         
@@ -16,9 +16,9 @@
                     <div class="card mb-3">
                         <div class="card-header d-flex">
                             {% if post.avatar %}
-                                <a href="#" class=""><img src="{{post.avatar.url}}" class="avatar" alt=""></a>
+                                <a href="{% url 'accounts:profile' post.slug %}" class=""><img src="{{post.avatar.url}}" class="avatar" alt=""></a>
                                 {% else %}
-                                <a href="#" class=""><img src="/static/assets/image/10.jfif" class="avatar" alt=""></a>
+                                <a href="{% url 'accounts:profile' post.slug %}" class=""><img src="/static/assets/image/10.jfif" class="avatar" alt=""></a>
                             {% endif %}
                             <div>
                                 <h4 class="text-warning ml-3">{{post.name|truncatechars:'9'}}</h4>
@@ -43,7 +43,7 @@
 </div>
 
 <div class="container">
-    <h3>You may like: </h3><hr>
+    <h3>Recomanded: </h3><hr>
     <div class="row">
 
         {% for post in recent %}
@@ -57,9 +57,9 @@
                     <div class="card mb-3">
                         <div class="card-header d-flex">
                             {% if post.avatar %}
-                                <a href="#" class=""><img src="{{post.avatar.url}}" class="avatar" alt=""></a>
+                                <a href="{% url 'accounts:profile' post.slug %}" class=""><img src="{{post.avatar.url}}" class="avatar" alt=""></a>
                                 {% else %}
-                                <a href="#" class=""><img src="/static/assets/image/10.jfif" class="avatar" alt=""></a>
+                                <a href="{% url 'accounts:profile' post.slug %}" class=""><img src="/static/assets/image/10.jfif" class="avatar" alt=""></a>
                             {% endif %}
                             <div>
                                 <h4 class="text-warning ml-3">{{post.name|truncatechars:'9'}}</h4>
